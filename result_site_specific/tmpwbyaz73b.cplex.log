@@ -1,0 +1,77 @@
+Solver command line: ['C:\\Program Files\\IBM\\ILOG\\CPLEX_Studio2211\\cplex\\bin\\x64_win64\\cplex.exe']
+
+
+Welcome to IBM(R) ILOG(R) CPLEX(R) Interactive Optimizer 22.1.1.0
+  with Simplex, Mixed Integer & Barrier Optimizers
+5725-A06 5725-A29 5724-Y48 5724-Y49 5724-Y54 5724-Y55 5655-Y21
+Copyright IBM Corp. 1988, 2022.  All Rights Reserved.
+
+Type 'help' for a list of available commands.
+Type 'help' followed by a command name for more
+information on commands.
+
+CPLEX> Logfile 'cplex.log' closed.
+Logfile 'C:\Users\wangy\Documents\GitHub\re_optimization\result_site_specific\tmpwbyaz73b.cplex.log' open.
+CPLEX> Problem 'C:\Users\wangy\Documents\GitHub\re_optimization\result_site_specific\tmpimy6cz5h.pyomo.lp' read.
+Read time = 0.28 sec. (7.28 ticks)
+CPLEX> Problem name         : C:\Users\wangy\Documents\GitHub\re_optimization\result_site_specific\tmpimy6cz5h.pyomo.lp
+Objective sense      : Minimize
+Variables            :   52617  [Nneg: 27764,  Free: 8786,  Binary: 7,
+                                 Other: 16060]
+Objective nonzeros   :      14
+Linear constraints   :   73052  [Less: 39437,  Greater: 3,  Equal: 33612]
+  Nonzeros           :  181200
+  RHS nonzeros       :    3022
+
+Variables            : Min LB: 0.000000         Max UB: 1.000000       
+Objective nonzeros   : Min   : 1.000000         Max   : 1.000000       
+Linear constraints   :
+  Nonzeros           : Min   : 0.002446311      Max   : 100000.0       
+  RHS nonzeros       : Min   : 0.01600000       Max   : 1000.000       
+CPLEX> Version identifier: 22.1.1.0 | 2022-11-27 | 9160aff4d
+Tried aggregator 3 times.
+MIP Presolve eliminated 50007 rows and 31028 columns.
+Aggregator did 8307 substitutions.
+Reduced MIP has 14738 rows, 13282 columns, and 43350 nonzeros.
+Reduced MIP has 5 binaries, 0 generals, 0 SOSs, and 0 indicators.
+Presolve time = 0.14 sec. (151.09 ticks)
+Found incumbent of value 219187.592749 after 0.17 sec. (173.17 ticks)
+Probing time = 0.00 sec. (0.76 ticks)
+Tried aggregator 1 time.
+Detecting symmetries...
+Reduced MIP has 14738 rows, 13282 columns, and 43350 nonzeros.
+Reduced MIP has 5 binaries, 0 generals, 0 SOSs, and 0 indicators.
+Presolve time = 0.03 sec. (25.84 ticks)
+Probing time = 0.02 sec. (0.71 ticks)
+MIP emphasis: balance optimality and feasibility.
+MIP search method: dynamic search.
+Parallel mode: deterministic, using up to 16 threads.
+Root relaxation solution time = 0.66 sec. (419.78 ticks)
+
+        Nodes                                         Cuts/
+   Node  Left     Objective  IInf  Best Integer    Best Bound    ItCnt     Gap
+
+*     0+    0                       219187.5927    -5277.1268           102.41%
+*     0+    0                         7265.6053    -5277.1268           172.63%
+      0     0     6749.5117     1     7265.6053     6749.5117       53    7.10%
+*     0+    0                         7265.5396     6749.5117             7.10%
+      0     0        cutoff           7265.5396                     83    0.00%
+Elapsed time = 1.06 sec. (709.39 ticks, tree = 0.01 MB, solutions = 3)
+
+Root node processing (before b&c):
+  Real time             =    1.06 sec. (711.82 ticks)
+Parallel b&c, 16 threads:
+  Real time             =    0.00 sec. (0.00 ticks)
+  Sync time (average)   =    0.00 sec.
+  Wait time (average)   =    0.00 sec.
+                          ------------
+Total (root+branch&cut) =    1.06 sec. (711.82 ticks)
+
+Solution pool: 3 solutions saved.
+
+MIP - Integer optimal solution:  Objective =  7.2655395892e+03
+Solution time =    1.06 sec.  Iterations = 83  Nodes = 0
+Deterministic time = 711.97 ticks  (669.78 ticks/sec)
+
+CPLEX> Incumbent solution written to file 'C:\Users\wangy\Documents\GitHub\re_optimization\result_site_specific\tmp94g6ulxf.cplex.sol'.
+CPLEX> 

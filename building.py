@@ -50,6 +50,12 @@ class Building:
 
         # time series data
         # read demand data
+        demand_df = demand_df[['E_sys_kWh', 'Qhs_sys_kWh', 'Qcs_sys_kWh', 'Qww_sys_kWh']]
+        # in the demands, sometimes there are 0 demand, sometimes there's positive demand
+        # in the positive demand, some are really spiky, and our task is to smooth out the spiky demand
+        # so we need to define a helper function to determine whether the demand is spiky or not and smooth it out
+        # the function is defined as follows:
+
         self.app: pd.DataFrame = - demand_df[['E_sys_kWh']].astype('float64').rename(columns={'E_sys_kWh': self.name})
         self.sh: pd.DataFrame = - demand_df[['Qhs_sys_kWh']].astype('float64').rename(columns={'Qhs_sys_kWh': self.name})
         self.sc: pd.DataFrame = - demand_df[['Qcs_sys_kWh']].astype('float64').rename(columns={'Qcs_sys_kWh': self.name})
@@ -84,3 +90,27 @@ class Building:
         self.pvt_h_relative_intensity.index.names = ['t']
         self.scfp_intensity.index.names = ['t']
 
+    def flatten_spikes(self, df: pd.DataFrame, column_name, percentile: float = 0.98, is_positive: bool = False):
+        # first fine non-zero values of the given column of the given dataframe
+        # then calculate the 95th percentile of the non-zero values
+        # then find the index of the values that are greater than the 98th percentile
+        # then set the values of the index to the 95th percentile
+        # then return the dataframe
+        # the input dataframe should have a datetime index
+        if not is_positive:
+            df = - df
+
+        nonzero_subset = df[df[column_name] != 0]
+        percentile_value = nonzero_subset[column_name].quantile(percentile)
+        df.loc[df[column_name] > percentile_value, column_name] = percentile_value
+
+        if not is_positive:
+            df = - df
+
+        return df
+
+    def flatten_spikes_demand(self, percentile:float = 0.98):
+        self.app = self.flatten_spikes(self.app, self.name, percentile, is_positive=False)
+        self.sh = self.flatten_spikes(self.sh, self.name, percentile, is_positive=False)
+        self.sc = self.flatten_spikes(self.sc, self.name, percentile, is_positive=False)
+        self.dhw = self.flatten_spikes(self.dhw, self.name, percentile, is_positive=False)

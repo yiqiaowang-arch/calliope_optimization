@@ -1,0 +1,6 @@
+set logfile C:\Users\wangy\Documents\GitHub\re_optimization\result_site_specific\tmpql7rjh1z.cplex.log
+read C:\Users\wangy\Documents\GitHub\re_optimization\result_site_specific\tmpzfbppyvr.pyomo.lp
+display problem stats
+optimize
+write C:\Users\wangy\Documents\GitHub\re_optimization\result_site_specific\tmpx19cf1wd.cplex.sol
+quit
