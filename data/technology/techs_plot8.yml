@@ -292,7 +292,6 @@ techs:
             monetary:
                 interest_rate: 0.05
                 energy_cap: 2000 # CHF per kWp
-                om_annual_investment_fraction: 0.01 # fraction of purchase cost
                 export: -0.05 # CHF per kWh, feed-in tariff
             co2:
                 om_prod: 0.042 # CO2 emission, kg per kWh
