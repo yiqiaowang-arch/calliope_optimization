@@ -25,7 +25,7 @@ run:
     solver: cplex
 #    solver_options:
 #        presolve: 0
-    save_logs: './result_site_specific_2'
+#    save_logs: './result_site_specific_2'
     # ensure_feasibility: true
 #    relax_constraint: # Enable relaxing some equality constraints to be min/max constraints. The extent of relaxation is given as a fraction.
 #        demand_share_per_timestep_decision_main_constraint: 0.01
@@ -117,7 +117,7 @@ techs:
         costs:
             monetary:
                 interest_rate: 0.05
-                om_prod: 13 # wood price, CHF per kWh
+                om_prod: 0.13 # wood price, CHF per kWh
             co2:
                 om_prod: 0.023 # CO2 emission, kg per kWh
     DHDC_small_heat: #
