@@ -20,8 +20,8 @@ run:
     cyclic_storage: true
     objective_options:
         cost_class:
-            co2: 1
-            monetary: 0
+            co2: 0
+            monetary: 1
     solver: cplex
 #    solver_options:
 #        presolve: 0
@@ -48,7 +48,8 @@ locations:
             PV:
 #            PVT:
             SCFP:
-            # DHW_to_heat:
+            DHW_to_heat:
+            # heat_to_geothermal:
             ASHP:
             ASHP_DHW:
             GSHP_heat:
@@ -124,18 +125,18 @@ techs:
             name: 'DH small'
             color: '#E37A72'
             parent: supply
-            carrier_out: heat
+            carrier_out: DHW
         constraints:
             energy_eff: 1
             energy_cap_min: 50 # kW
-            energy_cap_max: 100 # kW
+            energy_cap_max: 273.13 # kW
             lifetime: 30
         costs:
             monetary:
                 interest_rate: 0.05
-                energy_cap: 215.7 # CHF per kW
+                energy_cap: 173.8751 # CHF per kW
                 om_prod: 0.08 # heat price, CHF per kWh
-                purchase: 15250.5 # CHF per device
+                purchase: 16337.6764 # CHF per device
                 om_annual: 146 # yearly maintenance cost based on energy (power) capacity
             co2:
                 om_prod: 0.046 # CO2 emission, kg per kWh
@@ -148,14 +149,12 @@ techs:
         constraints:
             energy_eff: 1
             energy_cap_min: 50 # kW
-            energy_cap_max: 100 # kW
+            energy_cap_max: 273.13 # kW
             lifetime: 30
         costs:
             monetary:
                 interest_rate: 0.05
-                # energy_cap: 215.7 # CHF per kW
                 om_prod: 0.037 # cooling price, CHF per kWh
-                # purchase: 15250.5 # CHF per device
                 om_annual: 131 # yearly maintenance cost based on energy (power) capacity
             co2:
                 om_prod: 0.046 # CO2 emission, kg per kWh
@@ -164,18 +163,18 @@ techs:
             name: 'DH medium'
             color: '#E37A72'
             parent: supply
-            carrier_out: heat
+            carrier_out: DHW
         constraints:
             energy_eff: 1
-            energy_cap_min: 100 # kW
-            energy_cap_max: 700 # kW
+            energy_cap_min: 273.13 # kW
+            energy_cap_max: 848.75 # kW
             lifetime: 30
         costs:
             monetary:
                 interest_rate: 0.05
-                energy_cap: 115 # CHF per kW
+                energy_cap: 96.2914 # CHF per kW
                 om_prod: 0.08 # heat/cooling price, CHF per kWh
-                purchase: 29589 # CHF per device
+                purchase: 37528.4855 # CHF per device
                 om_annual: 146
             co2:
                 om_prod: 0.046 # CO2 emission, kg per kWh
@@ -187,8 +186,8 @@ techs:
             carrier_out: cooling
         constraints:
             energy_eff: 1
-            energy_cap_min: 100 # kW
-            energy_cap_max: 700 # kW
+            energy_cap_min: 273.13 # kW
+            energy_cap_max: 848.75 # kW
             lifetime: 30
         costs:
             monetary:
@@ -204,18 +203,18 @@ techs:
             name: 'DH large'
             color: '#E37A72'
             parent: supply
-            carrier_out: heat
+            carrier_out: DHW
         constraints:
             energy_eff: 1
-            energy_cap_min: 700 # kW
+            energy_cap_min: 848.75 # kW
             energy_cap_max: 2000 # kW
             lifetime: 30
         costs:
             monetary:
                 interest_rate: 0.05
-                energy_cap: 65 # CHF per kW
+                energy_cap: 62.5738 # CHF per kW
                 om_prod: 0.08 # heat/cooling price, CHF per kWh
-                purchase: 66851 # CHF per device
+                purchase: 66146.4332 # CHF per device
                 om_annual: 146
             co2:
                 om_prod: 0.046 # CO2 emission, kg per kWh
@@ -227,7 +226,7 @@ techs:
             carrier_out: cooling
         constraints:
             energy_eff: 1
-            energy_cap_min: 700 # kW
+            energy_cap_min: 848.75 # kW
             energy_cap_max: 2000 # kW
             lifetime: 30
         costs:
@@ -328,17 +327,17 @@ techs:
             name: 'Solar collector flat plate'
             color: '#ff6728'
             parent: supply
-            carrier_out: geothermal_storage
+            carrier_out: DHW
         constraints:
             resource: df=supply_SCFP
             resource_unit: energy_per_area
             energy_eff: 1
-            resource_area_per_energy_cap: 4 # 4m2 per kWp
+            resource_area_per_energy_cap: 2 # 2m2 per kWp
             lifetime: 15
         costs:
             monetary:
                 interest_rate: 0.05
-                energy_cap: 1000 # CHF per kW
+                energy_cap: 850 # CHF per kW
                 om_annual_investment_fraction: 0.01 # fraction of purchase cost
             co2:
                 om_prod: 0.015 # CO2 emission, kg per kWh
@@ -357,7 +356,8 @@ techs:
         costs:
             monetary:
                 interest_rate: 0.05
-    # ASHP, consumes electricity to produce heat, with a COP of 2.8
+
+    # ASHP, consumes electricity to produce heat, with a COP of 2.4
     ASHP:
         essentials:
             name: 'ASHP SH/SC'
@@ -460,7 +460,7 @@ techs:
             # force_asynchronous_prod_con: true # charge and discharge are not simultaneous
             lifetime: 15
             storage_cap_max: 1000 # kWh
-            storage_loss: 0.001
+            # storage_loss: 0.001
             storage_initial: 0 # initial storage level
         costs:
             monetary:
@@ -520,13 +520,14 @@ techs:
             lifetime: 30
             storage_cap_max: 100000 # kWh
             energy_cap_max: 100000 # kW
-            storage_loss: 0.001 # 0.1% loss per hour
-            storage_initial: 0.9 # initial storage level
+            # storage_loss: 0.001 # 0.1% loss per hour
+            storage_initial: 0.85 # initial storage level
         costs:
             monetary:
                 interest_rate: 0.05
-                om_annual_investment_fraction: 0 # fraction of purchase cost
-                storage_cap: 0 # already included in the cost of GSHP
+                # om_annual_investment_fraction: 0 # fraction of purchase cost
+                # om_prod: 0.1 # USD per kWh, storage cost
+                # storage_cap: 0 # already included in the cost of GSHP
 
     # demand technologies
     # appliances, electricity demand
