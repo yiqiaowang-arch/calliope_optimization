@@ -37,11 +37,11 @@ locations:
         techs:
             grid:
             wood_supply:
-            # DHDC_small_heat:
+            DHDC_small_heat:
             # DHDC_small_cooling:
-            # DHDC_medium_heat:
+            DHDC_medium_heat:
             # DHDC_medium_cooling:
-            # DHDC_large_heat:
+            DHDC_large_heat:
             # DHDC_large_cooling:
             wood_boiler_heat:
             wood_boiler_DHW:
